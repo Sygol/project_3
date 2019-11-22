@@ -28,7 +28,7 @@ def create_all_additions(product, cleaned_data):
 
 def create_lists_of_toppings_to_remove_and_add(cart_id, cleaned_data):
     new_topping_list = list(cleaned_data['toppings'])
-    old_topping_list = list(CartItem.objects.get(id=cart_id).values_list('toppings', flat=True))
+    old_topping_list = list(CartItem.objects.filter(id=cart_id).values_list('toppings', flat=True))
     toppings_to_remove = []
     toppings_to_add = []
 

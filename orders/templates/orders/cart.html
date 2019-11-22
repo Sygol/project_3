@@ -1,0 +1,66 @@
+{% extends 'pizza/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+<section class="cart__section">
+  {% if object_list %}
+    <h2 class="header">Cart</h2>
+      <div class="cart__table">
+        <div class="cart__item cart__item--header">
+            <div class="cart__card cart__item--number"></div><div class="cart__card cart__item--product">
+            Product</div><div class="cart__card cart__item--amount">
+            Amount</div><div class="cart__card cart__item--price">Price</div><div class="cart__card cart__item--size">
+            Size</div><div class="cart__card cart__item--delete"></div>
+        </div>
+        {% for object in object_list%}
+            <div class="cart__item">
+                <div class="cart__card cart__item--number">
+                    <span class="cart__counter"></span>
+                </div><div class="cart__card cart__item--product">
+                    {{object.product.type}}, {{object.product.name}}
+                    {% if object.toppings.all %}
+                      ({% for topping in object.toppings.all %}{% if forloop.last %}{{topping}})
+                        {% else %}{{topping}},
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    {% if object.extras.all %}
+                      (Additions: {% for extra in object.extras.all %}{% if forloop.last %}{{extra}})
+                        {% else %}{{extra}},
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                </div><div class="cart__card cart__item--amount">
+                    {{object.quantity}}
+                </div><div class="cart__card cart__item--price">{{object.total_price}}$
+                </div><div class="cart__card cart__item--size">
+                    {{object.product.size}}
+                </div><div class="cart__card cart__item--delete">
+                    <a href="{% url 'update_product' object.id %}">
+                        <img class="img__cart" src="{% static 'orders/images/edit.png' %}" alt="edit">
+                    </a>
+                    <a href="{% url 'delete_product' object.id %}">
+                        <img class="img__cart" src="{% static 'orders/images/delete.png' %}" alt="delete">
+                    </a></div>
+            </div>
+
+        {% endfor %}
+          <div class="cart__item cart__item--footer">
+            <div class="cart__card cart__item--number"></div><div class="cart__card cart__item--product">
+            </div><div class="cart__card cart__item--amount">
+            Total</div><div class="cart__card cart__item--price">{{price}}$</div><div class="cart__card cart__item--size">
+            </div><div class="cart__card cart__item--delete"></div>
+          </div>
+      </div>
+
+    <form action="cart" method="POST" >
+        {% csrf_token %}
+        <input type="submit" value="Confirm order" class="btn btn-primary btn-cart">
+    </form>
+        <a href="{% url 'index' %}"><button class="btn btn-primary btn-cart">Add another product</button></a>
+  {% else %}
+    <h2 class="header">Your cart is empty.</h2>
+    <a href="{% url 'index' %}"><button class="btn btn-primary btn-cart btn-cart" style="float:left;">Add product</button></a>
+  {% endif %}
+</section>
+
+{% endblock %}

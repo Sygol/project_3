@@ -1,0 +1,10 @@
+{% extends 'pizza/base.html' %}
+
+{% block body_block %}
+<section class="cart__section">
+    <h2 class="header">Are you sure you want to delete {{ object.product.type }} ({{object.product.name}}) from your cart ?</h2>
+    <form method="post">{% csrf_token %}
+        <input type="submit" value="Delete" class="btn btn-primary btn-cart" style="float:left;"/>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'pizza/base.html' %}
+{% load custom_tags %}
+{% block body_block %}
+{% regroup object_list by order as order_list %}
+<section class="cart__section">
+<h2 class="header">Your orders</h2>
+{% for order in order_list %}
+    <h3 class="status--header">Status:{{order.grouper.status_code}} <span style="float:right">{{order.grouper.created|date:"d-m-Y"}}</span></h3>
+      <div class="cart__table">
+        <div class="cart__item cart__item--header">
+            <div class="cart__card cart__item--number"></div><div class="cart__card cart__item--product">
+            Product</div><div class="cart__card cart__item--amount">
+            Amount</div><div class="cart__card cart__item--price">Price</div><div class="cart__card cart__item--size">
+            Size</div>
+        </div>
+        {% for item in order.list %}
+            <div class="cart__item">
+                <div class="cart__card cart__item--number">
+                    <span class="cart__counter"></span>
+                </div><div class="cart__card cart__item--product">
+                    {{item.product.type}}, {{item.product.name}}
+                    {% if item.toppings.all %}
+                      ({% for topping in item.toppings.all %}{% if forloop.last %}{{topping}})
+                        {% else %}{{topping}},
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    {% if item.extras.all %}
+                      (Additions: {% for extra in item.extras.all %}{% if forloop.last %}{{extra}})
+                        {% else %}{{extra}},
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                </div><div class="cart__card cart__item--amount">
+                    {{item.quantity}}
+                </div><div class="cart__card cart__item--price">{% get_price item.quantity item.product.price item.extras.all|length %}$
+                </div><div class="cart__card cart__item--size">
+                    {{item.product.size}}
+                </div>
+            </div>
+
+        {% endfor %}
+          <div class="cart__item cart__item--footer">
+            <div class="cart__card cart__item--number"></div><div class="cart__card cart__item--product">
+            </div><div class="cart__card cart__item--amount">
+            Total</div><div class="cart__card cart__item--price">{% get_total_price order.list %}$</div><div class="cart__card cart__item--size">
+            </div>
+          </div>
+      </div>
+{% endfor %}
+</section>
+{% endblock %}

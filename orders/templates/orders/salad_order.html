@@ -1,0 +1,67 @@
+{% extends 'pizza/base.html' %}
+{% block body_block %}
+<section class="order__section">
+    <h2 class="header">Salad</h2>
+    <form method="POST" action="{% url 'salad_order' %}">
+        {% csrf_token %}
+        <div>
+            <label for="id_product_names"><b>Choose salad:</b></label>
+            {{ form.product_names }}
+        </div>
+        <div>
+            <label for="id_quantity"><b>Quantity:</b></label>
+            {{ form.quantity }}
+        </div>
+        <div class="price"></div>
+        <div><input type="submit" value="Submit" class="btn btn-primary submit_order"></div>
+    </form>
+    <div>
+        {% if form.errors %}
+          {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+          {% endfor %}
+        {% endif%}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    $("#id_product_names, #id_quantity").change(function () {
+      var product = 5
+      var size = 3;
+      var name = $("#id_product_names").val();
+      var quantity = $("#id_quantity").val();
+      if (name!='') {
+        $.ajax({
+          url: '{% url "check_price" %}',
+          data: {
+             'product': product,
+             'size': size,
+             'name': name,
+             'quantity': quantity
+          },
+          dataType: 'json',
+          success: function(data){
+            $(".price").html("<h2>Price: "+data['price'].toFixed(2)+"$</h2>");
+          }
+      })}
+      else {
+        $(".price").text('');
+      }
+    });
+
+  </script>
+{% endblock %}

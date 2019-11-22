@@ -1,0 +1,64 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box;
+  font-size: 1.6rem; }
+
+.header {
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem; }
+
+.btn {
+  font-size: 1.6rem;
+  padding: 0.5rem 2rem;
+  margin-bottom: 1rem; }
+
+.form-control {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem; }
+
+.errorlist {
+  display: none; }
+
+.card {
+  display: inline-block;
+  width: 20%;
+  height: 30vh;
+  margin-right: 5rem;
+  margin-top: 5rem; }
+  .card:last-child {
+    margin-right: 0; }
+
+select.form-control:not([size]):not([multiple]) {
+  height: auto !important; }
+
+.form__content {
+  margin: 5rem auto 0 auto;
+  width: 40%; }
+
+.form__login {
+  margin-top: 10%; }
+
+.menu__cards {
+  width: 80;
+  text-align: center;
+  margin: 5rem auto 0 auto; }
+
+.order__section {
+  width: 40%;
+  margin: 5rem auto 0 auto; }
+
+.toppings__types {
+  display: none; }
+
+/*# sourceMappingURL=main.css.map */

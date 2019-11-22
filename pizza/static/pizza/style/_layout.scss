@@ -1,0 +1,83 @@
+.form__content{
+    margin: 5rem auto 0 auto;
+    width: 40%
+}
+
+.menu__cards{
+    width: 80;
+    text-align: center;
+    margin: 5rem auto 0 auto;
+}
+
+.price{
+    margin-bottom: 2rem;
+}
+
+#toppings__checkboxes{
+    display: none;
+}
+
+.order__section{
+    width: 40%;
+    margin: 5rem auto 0 auto;
+}
+
+.cart__section{
+    width: 60%;
+    margin: 5rem auto 0 auto;
+
+}
+.cart__item{
+    padding: 1.5rem 1rem;
+    display:flex;
+    align-items:center;
+    background: white;
+}
+
+.cart__table{
+    box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.75);
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.cart__card{
+    display: inline-block;
+}
+
+.cart__item--number{
+    width: 10%;
+}
+.cart__item--product{
+    width: 38%;
+}
+.cart__item--amount{
+    width: 13%;
+    text-align: center;
+}
+.cart__item--price{
+    width: 13%;
+    text-align: center;
+}
+.cart__item--size{
+    width: 13%;
+    text-align: center;
+    position: relative;
+    top: 50%;
+}
+.cart__item--delete{
+    width: 13%;
+}
+
+.cart__item--header{
+    font-size: 2.2rem;
+    font-weight: 600;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.cart__item--footer{
+    font-size: 2.2rem;
+    font-weight: 600;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}

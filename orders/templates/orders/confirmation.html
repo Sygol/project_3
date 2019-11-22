@@ -1,0 +1,8 @@
+{% extends 'pizza/base.html' %}
+
+{% block body_block %}
+<section class="cart__section">
+    <h2 class="header">Thanks for shopping with us.</h2>
+    <a href="{% url 'order_list' %}"><button class="btn btn-primary btn-cart" style="float:left;">Track your order</button></a>
+</section>
+{% endblock %}

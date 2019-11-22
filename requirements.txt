@@ -1,0 +1,7 @@
+django
+django-sass-processor
+django-compressor
+django-libsass
+python-dotenv
+gunicorn
+django-heroku
